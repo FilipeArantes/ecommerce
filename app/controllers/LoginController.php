@@ -15,7 +15,7 @@ class LoginController extends Controller
     public function logar($params)
     {
         $this->model->logar($params["email"], $params["senha"]);
-        $token = new Token("FILIEP");
+        $token = new Token();
         $token->create();
     }
 }

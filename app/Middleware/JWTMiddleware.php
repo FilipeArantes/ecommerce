@@ -28,7 +28,7 @@ class JWTMiddleware
 
         try {
             return $this->validateToken($token);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             http_response_code(401);
 
             exit('Token de acesso inválido ou não fornecido.');
@@ -56,17 +56,19 @@ class JWTMiddleware
             hash_hmac('sha256', $parts[0].'.'.$parts[1], $this->secretKey, true)
         );
 
-        if ($signature = $parts[2]) {
+        if ($signature == $parts[2]) {
             $payload = json_decode(
                 base64_decode(
                     $parts[1]
                 )
             );
             $teste = $payload;
+            http_response_code(403);
+
             return true;
-        }else {
-            return false;
         }
+
+        return false;
     }
 
     // private function getClaim($token, $claim)

@@ -5,7 +5,9 @@
             "Ipeweb\\MeuProjeto\\": "src/",
             "app\\": "app",
             "Routes\\": "routes", 
-            "library\\crud\\": "library"
+            "library\\crud\\": "library",
+            "Core\\": "core/",
+            "Core\\Router\\": "core/router"
         }
     },
     "authors": [

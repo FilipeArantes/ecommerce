@@ -22,11 +22,6 @@ class CategoriaController
         return $this->model->save($params);
     }
 
-    public function show()
-    {
-
-    }
-
     public function update()
     {
 

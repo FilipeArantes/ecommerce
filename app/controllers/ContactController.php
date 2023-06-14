@@ -13,10 +13,6 @@ class ContactController extends Controller
     ) {
     }
 
-    public function index()
-    {
-    }
-
     public function store($params)
     {
         try {

@@ -57,6 +57,11 @@ class ComposerStaticInitfa4de5405713755eeb85efc9487cdd0b
         array (
             'Dotenv\\' => 7,
         ),
+        'C' => 
+        array (
+            'Core\\Router\\' => 12,
+            'Core\\' => 5,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -115,6 +120,14 @@ class ComposerStaticInitfa4de5405713755eeb85efc9487cdd0b
         'Dotenv\\' => 
         array (
             0 => __DIR__ . '/..' . '/vlucas/phpdotenv/src',
+        ),
+        'Core\\Router\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core/router',
+        ),
+        'Core\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/core',
         ),
     );
 

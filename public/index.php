@@ -1,6 +1,6 @@
 <?php
 
-use Routes\teste\Router;
+use Routes\Router;
 
 require_once './../vendor/autoload.php';
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace Routes\teste;
+namespace Routes;
 
 use app\controllers\{CategoriaController, ContactController, DescontoController, EnderecoController, HomeController, LoginController, PedidoController, ProdutoController};
 use app\Middleware\JWTMiddleware;
-use Routes\teste\RoteadorAbstract;
+use Core\Router\RoteadorAbstract;
 
 class Router extends RoteadorAbstract
 {

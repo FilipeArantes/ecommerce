@@ -1,6 +1,6 @@
 <?php
 
-namespace Routes\teste;
+namespace Core\Router;
 
 abstract class RoteadorAbstract
 {

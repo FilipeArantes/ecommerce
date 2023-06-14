@@ -4,11 +4,9 @@ namespace app\token;
 
 class Token
 {
-    private $key;
-
-    public function __construct($key)
-    {
-        $this->key = $key;
+    public function __construct(
+        private string $key = "FILIEP"
+    ) {
     }
 
     public function create()
