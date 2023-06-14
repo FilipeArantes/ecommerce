@@ -1,0 +1,21 @@
+{
+    "name": "ipeweb/meu-projeto",
+    "autoload": {
+        "psr-4": {
+            "Ipeweb\\MeuProjeto\\": "src/",
+            "app\\": "app",
+            "Routes\\": "routes", 
+            "library\\crud\\": "library"
+        }
+    },
+    "authors": [
+        {
+            "name": "Filipe Arantes",
+            "email": "filharantes@gmail.com"
+        }
+    ],
+    "require": {
+        "lcobucci/jwt": "^5.0",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
