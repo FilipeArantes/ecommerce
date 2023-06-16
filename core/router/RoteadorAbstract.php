@@ -1,12 +1,14 @@
 <?php
 
-namespace Core\Router;
+namespace core\router;
+
+use core\responses\Responses;
 
 abstract class RoteadorAbstract
 {
     protected $rotas = [];
 
-    public function adicionarRota($metodo, $uri, $controller, $metodoController, $middleware = false)
+    public function adicionarRota($metodo, $uri, $controller, $metodoController, $middleware = false, $admin = false)
     {
         $this->rotas[] = [
             'metodo' => $metodo,
@@ -14,6 +16,7 @@ abstract class RoteadorAbstract
             'controller' => $controller,
             'metodoController' => $metodoController,
             'middleware' => $middleware,
+            'admin' => $admin,
         ];
     }
 
@@ -30,10 +33,16 @@ abstract class RoteadorAbstract
             if ($verb == $rota['metodo'] && preg_match("#^{$pattern}$#", $uri, $matches)) {
                 if ($rota['middleware']) {
                     $middleware = new $rota['middleware']();
-                    $hasPermission = $middleware->handle($rota);
+                    if ($rota['admin']) {
+                        $hasPermission = $middleware->handle('admin');
+                    }
+                    if (!$rota['admin']) {
+                        $hasPermission = $middleware->handle();
+                    }
                     if (!$hasPermission) {
                         http_response_code(401);
-                        print json_encode(["message" => "Não tem permissão para acessar a rota"]);
+                        print json_encode(['message' => 'Não tem permissão para acessar a rota']);
+
                         return;
                     }
                 }
@@ -60,8 +69,9 @@ abstract class RoteadorAbstract
                 }
 
                 // http_response_code()
-
-                // print json_encode($response);
+                if ($response != null) {
+                    print json_encode($response);
+                }
 
                 return;
             }

@@ -31,12 +31,13 @@ class ProdutoModel extends Crud
         $this->_insert('produto', $arrDefault);
     }
 
-    public function update()
+    public function update($table, $data, $condition, $id)
     {
-        
+        return $this->_update($table, $data, $condition, $id);
     }
 
-    public function delete()
+    public function delete($table, $condition, $value)
     {
+        return $this->_delete($table, $condition, $value);
     }
 }

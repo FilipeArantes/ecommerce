@@ -26,13 +26,13 @@ class ProdutoController extends Controller
         return $this->model->save($params);
     }
 
-    public function update($id)
+    public function update($id, $params)
     {
-        print $id;
+        return $this->model->update('produto', $params, 'id', $id);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        return $this->model->delete();
+        return $this->model->delete('desconto', 'id', $id);
     }
 }

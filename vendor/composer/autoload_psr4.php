@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'library\\crud\\' => array($baseDir . '/library'),
+    'core\\' => array($baseDir . '/core'),
     'app\\' => array($baseDir . '/app'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
@@ -20,6 +21,4 @@ return array(
     'GrahamCampbell\\ResultType\\' => array($vendorDir . '/graham-campbell/result-type/src'),
     'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Dotenv\\' => array($vendorDir . '/vlucas/phpdotenv/src'),
-    'Core\\Router\\' => array($baseDir . '/core/router'),
-    'Core\\' => array($baseDir . '/core'),
 );

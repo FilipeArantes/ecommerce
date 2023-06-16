@@ -6,8 +6,7 @@
             "app\\": "app",
             "Routes\\": "routes", 
             "library\\crud\\": "library",
-            "Core\\": "core/",
-            "Core\\Router\\": "core/router"
+            "core\\": "core"
         }
     },
     "authors": [

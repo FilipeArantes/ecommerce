@@ -10,13 +10,15 @@ class JWTMiddleware
     use Base64UrlEncode;
 
     private $secretKey;
+    private $adminKey;
 
     public function __construct()
     {
         $this->secretKey = $_ENV['KEY'];
+        $this->adminKey = $_ENV['ADMKEY'];
     }
 
-    public function handle($request)
+    public function handle($isAdm = '')
     {
         $token = $this->extractTokenFromRequest();
 
@@ -26,6 +28,16 @@ class JWTMiddleware
             exit('Token de acesso não fornecido.');
         }
 
+        if ($isAdm) {
+            try {
+                return $this->validateAdmToken($token);
+            } catch (\Exception $e) {
+                http_response_code(401);
+
+                exit('Token de acesso inválido ou não fornecido.');
+            }
+        }
+
         try {
             return $this->validateToken($token);
         } catch (\Exception $e) {
@@ -33,8 +45,6 @@ class JWTMiddleware
 
             exit('Token de acesso inválido ou não fornecido.');
         }
-
-        // return $next($request);
     }
 
     private function extractTokenFromRequest()
@@ -62,8 +72,6 @@ class JWTMiddleware
                     $parts[1]
                 )
             );
-            $teste = $payload;
-            http_response_code(403);
 
             return true;
         }
@@ -71,10 +79,24 @@ class JWTMiddleware
         return false;
     }
 
-    // private function getClaim($token, $claim)
-    // {
-    //     $parsedToken = (new Parser())->parse($token);
+    private function validateAdmToken($token)
+    {
+        $parts = explode('.', $token);
 
-    //     return $parsedToken->getClaim($claim);
-    // }
+        $signature = $this->base64UrlEncode(
+            hash_hmac('sha256', $parts[0].'.'.$parts[1], $this->adminKey, true)
+        );
+
+        if ($signature == $parts[2]) {
+            $payload = json_decode(
+                base64_decode(
+                    $parts[1]
+                )
+            );
+
+            return true;
+        }
+
+        return false;
+    }
 }

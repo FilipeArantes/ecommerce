@@ -11,7 +11,12 @@ class DescontoModel extends Crud
         return $this->_insert($table, $params);
     }
 
-    public function deletar($table, $condition, $value)
+    public function update($table, $data, $condition, $id)
+    {
+        return $this->_update($table, $data, $condition, $id);
+    }
+
+    public function delete($table, $condition, $value)
     {
         return $this->_delete($table, $condition, $value);
     }

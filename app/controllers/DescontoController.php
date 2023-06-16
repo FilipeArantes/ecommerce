@@ -16,8 +16,13 @@ class DescontoController
         return $this->model->save('desconto', $params);
     }
 
+    public function update($id, $params)
+    {
+        return $this->model->update('desconto', $params, 'id', $id);
+    }
+
     public function destroy($id)
     {
-        return $this->model->deletar("desconto", "id" ,$id);
+        return $this->model->delete('desconto', 'id', $id);
     }
 }

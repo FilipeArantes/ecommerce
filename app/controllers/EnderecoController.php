@@ -15,4 +15,14 @@ class EnderecoController extends Controller
     {
         return $this->model->save($params);
     }
+
+    public function update($params, $id)
+    {
+        return $this->model->update('endereco', $params, 'id', $id);
+    }
+
+    public function destroy($id)
+    {
+        return $this->model->delete("endereco", "id" ,$id);
+    }
 }

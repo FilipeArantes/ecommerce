@@ -3,19 +3,25 @@
 namespace app\controllers;
 
 use app\model\LoginModel;
-use app\token\Token;
+use app\traits\VerificarLogin;
 
 class LoginController extends Controller
 {
+    use VerificarLogin;
+
     public function __construct(
         private $model = new LoginModel()
     ) {
     }
 
-    public function logar($params)
+    public function logar(array $params)
     {
-        $this->model->logar($params["email"], $params["senha"]);
-        $token = new Token();
-        $token->create();
+        // $teste = password_verify();
+        // $verificacao = $this->verificar($params['email'], $params['senha']);
+        // if (!$verificacao) {
+        //     return http_response_code(404);
+        // }
+
+        return $this->model->logar($params['email'], $params['senha']);
     }
 }

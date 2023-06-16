@@ -22,13 +22,13 @@ class CategoriaController
         return $this->model->save($params);
     }
 
-    public function update()
+    public function update($id, $params)
     {
-
+        return $this->model->update('categoria', $params, 'id', $id);
     }
 
-    public function destroy()
+    public function destroy($id)
     {
-        
+        return $this->model->delete('categoria', 'id', $id);
     }
 }

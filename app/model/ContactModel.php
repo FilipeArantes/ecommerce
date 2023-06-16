@@ -11,11 +11,9 @@ class ContactModel extends Crud
 
     public function save($params)
     {
-        $hashSenha = password_hash($params['senha'], PASSWORD_DEFAULT);
+        $hashSenha = password_hash($params['senha'], PASSWORD_BCRYPT);
         if ($this->verificarEmail($params['email'])) {
             throw new \InvalidArgumentException('Email já esta em uso');
-
-            return;
         }
 
         $teste = new Crud();

@@ -17,12 +17,12 @@ class ContactController extends Controller
     {
         try {
             $select = new Crud();
-        if ($select->_select('usuario','*', 'email', $params["email"])) {
+        if ($select->_select('usuario', 'email', $params["email"])) {
             http_response_code(406);
             throw new InvalidArgumentException("Email inválido ou já está em uso");
         }
         } catch (\Throwable $th) {
-            //throw $th;
+            print json_encode(['message' => $th->getMessage()]);
         }
         
         return $this->model->save($params);

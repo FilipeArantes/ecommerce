@@ -17,6 +17,19 @@ class Select extends Crud
 
         $consulta = $this->db->query($sql);
 
-        return $consulta->fetchAll(\PDO::FETCH_ASSOC);
+        return $consulta->fetcAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function _selectJoin($firstTable, $secondTable, $condition, $secondCondition, $where = '', $value = '')
+    {
+        $sql = "SELECT * FROM {$firstTable} as a JOIN {$secondTable} as b on a.{$condition} = b.{$secondCondition}";
+
+        if ($where) {
+            $sql .= "WHERE a.{$where} = {$value}";
+        }
+
+        $consulta = $this->db->query($sql);
+
+        return $consulta->fetcAll(\PDO::FETCH_ASSOC);
     }
 }
