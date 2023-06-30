@@ -1,10 +1,13 @@
 <?php
 
+use core\router\Config;
 use Routes\Router;
 
 require_once './../vendor/autoload.php';
 
 header('Content-Type: application/json');
+
+Config::setCors();
 
 $dotenv = Dotenv\Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();

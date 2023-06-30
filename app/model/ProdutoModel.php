@@ -14,7 +14,7 @@ class ProdutoModel extends Crud
 
     public function detail($table, $id, $column)
     {
-        $this->_select($table, $column, $id);
+        return $this->_select($table, $column, $id);
     }
 
     public function save(array $arrProdutos)
@@ -28,7 +28,7 @@ class ProdutoModel extends Crud
             'preco_inicial' => $arrProdutos['preco'],
         ];
 
-        $this->_insert('produto', $arrDefault);
+        return $this->_insert('produto', $arrDefault);
     }
 
     public function update($table, $data, $condition, $id)

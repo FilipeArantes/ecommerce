@@ -3,7 +3,6 @@
 namespace app\controllers;
 
 use app\model\CategoriaModel;
-use library\crud\Select;
 
 class CategoriaController
 {

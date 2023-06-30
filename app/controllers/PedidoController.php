@@ -15,4 +15,14 @@ class PedidoController extends Controller
     {
         return $this->model->checkout("pedido", $params);
     }
+
+    public function show($id)
+    {
+        return $this->model->showOrders('pedido', 'id_usuario', $id);
+    }
+
+    public function count()
+    {
+        return $this->model->countPedidos('pedido');
+    }
 }

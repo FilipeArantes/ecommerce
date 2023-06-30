@@ -2,7 +2,7 @@
 
 namespace Routes;
 
-use app\controllers\{AvaliacaoController, CategoriaController, ContactController, DescontoController, EnderecoController, HomeController, LoginController, PedidoController, ProdutoController};
+use app\controllers\{AvaliacaoController, CarrinhoController, CategoriaController, UsuarioController, DescontoController, EnderecoController, HomeController, LoginController, PedidoController, ProdutoController};
 use app\Middleware\JWTMiddleware;
 use core\router\RoteadorAbstract;
 
@@ -18,9 +18,9 @@ class Router extends RoteadorAbstract
         $this->adicionarRota('POST', '/categoria', CategoriaController::class, 'store', JWTMiddleware::class, true);
         $this->adicionarRota('PUT', '/categoria', CategoriaController::class, 'update', JWTMiddleware::class, true);
         $this->adicionarRota('DELETE', '/categoria/{id}', CategoriaController::class, 'destroy', JWTMiddleware::class, true);
-        $this->adicionarRota('GET', '/carrinho/{id}', CategoriaController::class, 'index', JWTMiddleware::class);
-        $this->adicionarRota('POST', '/carrinho', CategoriaController::class, 'store', JWTMiddleware::class);
-        $this->adicionarRota('POST', '/contato', ContactController::class, 'store');
+        $this->adicionarRota('GET', '/carrinho/{id}', CarrinhoController::class, 'index', JWTMiddleware::class);
+        $this->adicionarRota('POST', '/carrinho', CarrinhoController::class, 'store', JWTMiddleware::class);
+        $this->adicionarRota('POST', '/usuario', UsuarioController::class, 'store');
         $this->adicionarRota('POST', '/desconto', DescontoController::class, 'store', JWTMiddleware::class, true);
         $this->adicionarRota('PUT', '/desconto/{id}', DescontoController::class, 'update', JWTMiddleware::class, true);
         $this->adicionarRota('DELETE', '/desconto/{id}', DescontoController::class, 'destroy', JWTMiddleware::class, true);
@@ -28,7 +28,9 @@ class Router extends RoteadorAbstract
         $this->adicionarRota('PUT', '/endereco', EnderecoController::class, 'update', JWTMiddleware::class);
         $this->adicionarRota('PUT', '/endereco', EnderecoController::class, 'destroy', JWTMiddleware::class);
         $this->adicionarRota('POST', '/login', LoginController::class, 'logar');
+        $this->adicionarRota('GET', '/pedido/{id}', PedidoController::class, 'show', JWTMiddleware::class);
         $this->adicionarRota('POST', '/pedido', PedidoController::class, 'store', JWTMiddleware::class);
+        $this->adicionarRota('GET', '/pedido', PedidoController::class, 'count');
         $this->adicionarRota('GET', '/produto', ProdutoController::class, 'index', JWTMiddleware::class);
         $this->adicionarRota('GET', '/produto/{id}', ProdutoController::class, 'show', JWTMiddleware::class);
         $this->adicionarRota('POST', '/produto', ProdutoController::class, 'store', JWTMiddleware::class, true);

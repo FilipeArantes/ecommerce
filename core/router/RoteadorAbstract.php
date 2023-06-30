@@ -2,6 +2,7 @@
 
 namespace core\router;
 
+use core\responses\exceptions\AppError;
 use core\responses\Responses;
 
 abstract class RoteadorAbstract
@@ -52,20 +53,26 @@ abstract class RoteadorAbstract
                 $controller = new $rota['controller']();
                 $data = json_decode(file_get_contents('php://input'), true);
 
-                if ('POST' == $verb) {
-                    $response = call_user_func_array([$controller, $rota['metodoController']], [$data]);
-                }
-                if ('PUT' == $verb) {
-                    $response = call_user_func_array([$controller, $rota['metodoController']], [current($params), $data]);
-                }
-                if ('GET' == $verb and count($params)) {
-                    $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
-                }
-                if ('DELETE' == $verb and count($params)) {
-                    $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
-                }
-                if ('GET' == $verb and !count($params)) {
-                    $response = call_user_func_array([$controller, $rota['metodoController']], [$data]);
+                try {
+                    if ('POST' == $verb) {
+                        return Responses::created(call_user_func_array([$controller, $rota['metodoController']], [$data]));
+                    }
+                    if ('PUT' == $verb) {
+                        $response = call_user_func_array([$controller, $rota['metodoController']], [current($params), $data]);
+                    }
+                    if ('GET' == $verb and count($params)) {
+                        $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
+                    }
+                    if ('DELETE' == $verb and count($params)) {
+                        $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
+                    }
+                    if ('GET' == $verb and !count($params)) {
+                        $response = call_user_func_array([$controller, $rota['metodoController']], [$data]);
+                    }
+                } catch (AppError $th) {
+                    return Responses::notAcceptable($th);
+                } catch (\Throwable $th) {
+                    return Responses::failed($th);
                 }
 
                 // http_response_code()
@@ -77,12 +84,8 @@ abstract class RoteadorAbstract
             }
         }
 
-        // Se não houver correspondência de rota, retornar erro 404
-        http_response_code(404);
-
         $verbLowercase = strtolower($verb);
-        print json_encode("Cannot {$verbLowercase} {$uri}");
 
-        exit;
+        return Responses::notFound("Cannot {$verbLowercase} {$uri}");
     }
 }

@@ -7,16 +7,16 @@ class AvaliacaoModel extends Crud
 {
     public function getAll()
     {
-        $this->_select('avaliacao');
+        return $this->_select('avaliacao');
     }
 
     public function save($data)
     {
-        $this->_insert('avaliacao', $data);
+        return $this->_insert('avaliacao', $data);
     }
 
     public function delete($table, $condition, $value)
     {
-        $this->_delete($table, $condition, $value);
+        return $this->_delete($table, $condition, $value);
     }
 }

@@ -16,6 +16,13 @@ class Crud
         return $select->_select($table, $condition, $value, $secondCondition, $secondValue, $column);
     }
 
+    public function _selectCount($table)
+    {
+        $selectCount = new Select();
+
+        return $selectCount->_selectCount($table);
+    }
+
     public function _selectJoin($firstTable, $secondTable, $condition, $secondCondition, $where = '', $value = '')
     {
         $selectJoin = new Select();

@@ -7,7 +7,7 @@ use app\traits\EmailJaUsado;
 use core\responses\exceptions\AppError;
 use library\crud\Crud;
 
-class UsuarioModel extends Crud
+class UsuarioAdmModel extends Crud
 {
     use EmailJaUsado;
 
@@ -25,7 +25,7 @@ class UsuarioModel extends Crud
             'senha' => $hashSenha,
         ];
         $teste->_insert('usuario', $arrValores);
-        $token = new Token('FILIEP');
+        $token = new Token('admin');
         $token->create();
     }
 }

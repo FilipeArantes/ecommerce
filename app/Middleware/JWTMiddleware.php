@@ -3,7 +3,6 @@
 namespace app\Middleware;
 
 use app\traits\Base64UrlEncode;
-use Exception;
 
 class JWTMiddleware
 {
