@@ -12,7 +12,7 @@ class AvaliacaoModel extends Crud
 
     public function save($data)
     {
-        return $this->_insert('avaliacao', $data);
+        return $this->_insert('comentario', $data);
     }
 
     public function delete($table, $condition, $value)

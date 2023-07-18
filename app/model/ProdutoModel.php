@@ -2,12 +2,12 @@
 
 namespace app\model;
 
+use core\TratamentoImagem;
 use library\crud\Crud;
-use library\crud\Select;
 
 class ProdutoModel extends Crud
 {
-    public function getAll()
+    public function getAll(): array
     {
         return $this->_select('produto');
     }
@@ -19,6 +19,10 @@ class ProdutoModel extends Crud
 
     public function save(array $arrProdutos)
     {
+        $teste = new TratamentoImagem();
+        $imagemProduto = $teste->tratarImagem();
+        $caminho = "http://localhost/frame/public/img/{$imagemProduto}";
+
         $arrDefault = [
             'id_categoria' => $arrProdutos['id_categoria'],
             'nome' => $arrProdutos['nome'],
@@ -26,6 +30,7 @@ class ProdutoModel extends Crud
             'preco' => $arrProdutos['preco'],
             'quantidade_estoque' => $arrProdutos['quantidade_estoque'],
             'preco_inicial' => $arrProdutos['preco'],
+            'imagem' => $caminho,
         ];
 
         return $this->_insert('produto', $arrDefault);

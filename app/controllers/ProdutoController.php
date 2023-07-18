@@ -33,6 +33,6 @@ class ProdutoController extends Controller
 
     public function destroy($id)
     {
-        return $this->model->delete('desconto', 'id', $id);
+        return $this->model->delete('produto', 'id', $id);
     }
 }

@@ -11,7 +11,7 @@ class UsuarioAdmModel extends Crud
 {
     use EmailJaUsado;
 
-    public function save($params)
+    public function save($params): void
     {
         if ($this->verificarEmail($params['email'])) {
             throw new AppError('Email já esta em uso');

@@ -13,7 +13,7 @@ class CategoriaController
 
     public function index()
     {
-        return $this->model->index('categoria', 'nome');
+        return $this->model->index('categoria');
     }
 
     public function store($params)

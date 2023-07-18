@@ -25,10 +25,10 @@ class Responses
         print json_encode(['message' => $message]);
     }
 
-    public static function unauthorized(\Throwable $error): void
+    public static function unauthorized($message): void
     {
         http_response_code(401);
-        print json_encode(['message' => $error->getMessage()]);
+        print json_encode(['message' => $message]);
     }
 
     public static function notAcceptable(AppError $error): void

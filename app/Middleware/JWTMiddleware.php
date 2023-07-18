@@ -3,6 +3,7 @@
 namespace app\Middleware;
 
 use app\traits\Base64UrlEncode;
+use core\responses\Responses;
 
 class JWTMiddleware
 {
@@ -17,14 +18,12 @@ class JWTMiddleware
         $this->adminKey = $_ENV['ADMKEY'];
     }
 
-    public function handle($isAdm = '')
+    public function handle($isAdm = '') 
     {
         $token = $this->extractTokenFromRequest();
 
         if (!$token) {
-            http_response_code(401);
-
-            exit('Token de acesso não fornecido.');
+            return Responses::unauthorized('Token de acesso não fornecido.');
         }
 
         if ($isAdm) {
@@ -57,7 +56,7 @@ class JWTMiddleware
         return null;
     }
 
-    private function validateToken($token)
+    private function validateToken($token): bool
     {
         $parts = explode('.', $token);
 

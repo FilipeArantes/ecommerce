@@ -4,6 +4,7 @@ namespace core\router;
 
 use core\responses\exceptions\AppError;
 use core\responses\Responses;
+use core\TratamentoImagem;
 
 abstract class RoteadorAbstract
 {
@@ -53,9 +54,14 @@ abstract class RoteadorAbstract
                 $controller = new $rota['controller']();
                 $data = json_decode(file_get_contents('php://input'), true);
 
+                $hasFile = TratamentoImagem::hasFile($_FILES);
+                if ($hasFile) {
+                    $data = $_POST;
+                }
+
                 try {
                     if ('POST' == $verb) {
-                        return Responses::created(call_user_func_array([$controller, $rota['metodoController']], [$data]));
+                        $response = call_user_func_array([$controller, $rota['metodoController']], [$data]);
                     }
                     if ('PUT' == $verb) {
                         $response = call_user_func_array([$controller, $rota['metodoController']], [current($params), $data]);
@@ -75,10 +81,7 @@ abstract class RoteadorAbstract
                     return Responses::failed($th);
                 }
 
-                // http_response_code()
-                if ($response != null) {
-                    print json_encode($response);
-                }
+                print json_encode($response);
 
                 return;
             }

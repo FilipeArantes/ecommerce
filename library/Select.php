@@ -6,16 +6,20 @@ class Select extends Crud
 {
     public function _select($table, $condition = '', $value = '', $secondCondition = '', $secondValue = '', $column = '*')
     {
-        $sql = "SELECT {$column} FROM {$table}";
+        $sql = [];
 
         if ($condition) {
-            $sql .= " WHERE {$condition} = '{$value}'";
+            $sql[] = "{$condition} = '{$value}'";
         }
         if ($secondCondition) {
-            $sql .= " and {$secondCondition} = '{$secondValue}'";
+            $sql[] = "{$secondCondition} = '{$secondValue}'";
         }
+        if ($table == "produto" || $table == "categoria") {
+            $sql[] = "bo_ativo = true";
+        }
+        $where = "SELECT {$column} FROM {$table} WHERE " . implode(" AND ", $sql);
 
-        $consulta = $this->db->query($sql);
+        $consulta = $this->db->query($where);
 
         return $consulta->fetchAll(\PDO::FETCH_ASSOC);
     }
@@ -36,6 +40,15 @@ class Select extends Crud
     public function _selectCount($table)
     {
         $sql = "SELECT count(*) FROM {$table}";
+
+        $consulta = $this->db->query($sql);
+
+        return $consulta->fetch(\PDO::FETCH_ASSOC);
+    }
+    
+    public function _selectSum($table, $column)
+    {
+        $sql = "SELECT sum({$column}) FROM {$table}";
 
         $consulta = $this->db->query($sql);
 

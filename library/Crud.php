@@ -30,6 +30,13 @@ class Crud
         return $selectJoin->_selectJoin($firstTable, $secondTable, $condition, $secondCondition, $where, $value);
     }
 
+    public function _selectSum($table, $column)
+    {
+        $selectSum = new Select();
+
+        return $selectSum->_selectSum($table, $column);
+    }
+
     public function _insert($table, $arrValores)
     {
         $insert = new Insert();
@@ -42,6 +49,13 @@ class Crud
         $delete = new Delete();
 
         return $delete->_delete($table, $condition, $value);
+    }
+
+    public function _deleteCat($table, $condition, $value)
+    {
+        $delete = new Delete();
+
+        return $delete->_deleteCat($table, $condition, $value);
     }
 
     public function _update($table, $data, $condition, $id, $params = [])

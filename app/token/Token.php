@@ -20,8 +20,6 @@ class Token
             hash_hmac('sha256', $header.'.'.$payload, $this->key, true)
         );
 
-        return print $header.'.'.$payload.'.'.$signature;
+        return $header.'.'.$payload.'.'.$signature;
     }
-
-    
 }
