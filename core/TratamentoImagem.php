@@ -19,7 +19,7 @@ class TratamentoImagem
             $nomeImagem = basename($imagem[$key]['name']);
             $nomeTratado = str_replace(' ', '', $nomeImagem);
             $imagem[$key]['full_path'] = "../public/img/{$nomeTratado}";
-            $teste = move_uploaded_file($imagem['tmp_name'], $imagem[$key]['full_path']);
+            move_uploaded_file($imagem['tmp_name'], $imagem[$key]['full_path']);
         }
 
         return $nomeTratado;
@@ -28,6 +28,5 @@ class TratamentoImagem
     public static function hasFile(array $file): bool
     {
         return count($file) > 0;
-
     }
 }

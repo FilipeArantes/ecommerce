@@ -23,6 +23,6 @@ class EnderecoController extends Controller
 
     public function destroy($id)
     {
-        return $this->model->delete("endereco", "id" ,$id);
+        return $this->model->delete('endereco', 'id', $id);
     }
 }

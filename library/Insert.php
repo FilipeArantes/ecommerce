@@ -4,7 +4,7 @@ namespace library\crud;
 
 class Insert extends Crud
 {
-    public function _insert($table, $arrValores)
+    public function _insert($table, $arrValores): string
     {
         $columns = implode(', ', array_keys($arrValores));
         $values = implode(', ', array_fill(0, count($arrValores), '?'));

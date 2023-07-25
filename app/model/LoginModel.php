@@ -20,16 +20,12 @@ class LoginModel extends Crud
         $verificacao = $this->verificar($email);
         $dados = $this->_select("usuario", "email", $email);
 
-        if (!$verificacao) {
+        if (!$verificacao || !$senhaCorreta) {
             http_response_code(404);
 
-            throw new AppError('Email não encontrado, tente novamente');
+            throw new AppError('Usuario ou senha incorretos, tente novamente');
         }
-        if (!$senhaCorreta) {
-            http_response_code(403);
-
-            throw new AppError('A senha está incorreta, tente novamente');
-        }
+        
 
         $token = new Token('FILIEP');
         $login->token = $token->create();

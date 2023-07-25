@@ -20,5 +20,14 @@ class CarrinhoController
     {
         return $this->model->index('carrinho', 'produto', 'id_produto', 'id', 'id_usuario', $id);
     }
+
+    public function destroy($idCarrinho, $idProduto)
+    {
+        return $this->model->remove('carrinho', 'id_carrinho', $idCarrinho, 'id_produto', $idProduto);
+    }
+
+    public function sum($id)
+    {
+        return $this->model->sum('carrinho', 'preco_produto', $id, 'id_usuario');
+    }
 }
-    

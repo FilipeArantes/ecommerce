@@ -11,8 +11,10 @@ class UsuarioModel extends Crud
 {
     use EmailJaUsado;
 
-    public function save($params): void
+    public function save($params): \stdClass
     {
+        $criarConta = new \stdClass();
+
         if ($this->verificarEmail($params['email'])) {
             throw new AppError('Email já esta em uso');
         }
@@ -25,7 +27,12 @@ class UsuarioModel extends Crud
             'senha' => $hashSenha,
         ];
         $teste->_insert('usuario', $arrValores);
+        $dados = $this->_select('usuario', 'email', $params['email']);
+
         $token = new Token('FILIEP');
-        $token->create();
+        $criarConta->token = $token->create();
+        $criarConta->me = $dados; // Informações do usuario
+
+        return $criarConta;
     }
 }

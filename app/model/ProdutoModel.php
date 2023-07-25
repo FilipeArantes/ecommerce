@@ -27,9 +27,9 @@ class ProdutoModel extends Crud
             'id_categoria' => $arrProdutos['id_categoria'],
             'nome' => $arrProdutos['nome'],
             'descricao' => $arrProdutos['descricao'],
-            'preco' => $arrProdutos['preco'],
+            'preco_produto' => $arrProdutos['preco_produto'],
             'quantidade_estoque' => $arrProdutos['quantidade_estoque'],
-            'preco_inicial' => $arrProdutos['preco'],
+            'preco_inicial' => $arrProdutos['preco_produto'],
             'imagem' => $caminho,
         ];
 

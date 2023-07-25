@@ -18,6 +18,6 @@ class DescontoModel extends Crud
 
     public function delete($table, $condition, $value)
     {
-        return $this->_deleteCat($table, $condition, $value);
+        return $this->_deleteDesc($table, $condition, $value);
     }
 }

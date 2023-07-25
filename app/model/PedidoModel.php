@@ -9,9 +9,18 @@ class PedidoModel extends Crud
     public function checkout($table, $params)
     {
         foreach ($params as $key => $value) {
-            $this->_insert($table, $value);
+            $produtosCarrinho = $this->_select("carrinho", 'id_usuario' ,$value['produto']['id_usuario']);
         }
-        // $atulizarEstoque = $this->;
+
+        foreach ($params as $key => $value) {
+            // $this->_update("carrinho", );
+            $produtos = $this->_selectUnique('produto', 'id', $value['produto']['id_produto']);
+            $value['produto']['dados'] = json_encode($produtos);
+            unset($value['produto']['id_produto']);
+            unset($value['produto']['email']);
+            $this->_insert($table, $value['produto']);
+            // $atulizarEstoque = $this->;
+        }
     }
 
     public function countPedidos($table)
@@ -26,7 +35,7 @@ class PedidoModel extends Crud
 
     public function pedidosRecentes($table)
     {
-        return $this->_selectJoin($table,);
+        // return $this->_selectJoin($table,);
     }
 
     public function sumPedidos($table, $column)

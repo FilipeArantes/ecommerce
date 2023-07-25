@@ -70,6 +70,11 @@ abstract class RoteadorAbstract
                         $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
                     }
                     if ('DELETE' == $verb and count($params)) {
+                        if (count($params) === 2) {
+                            $response = call_user_func_array([$controller, $rota['metodoController']], [$params['id_a'], $params['id_b']]);
+
+                            return;
+                        }
                         $response = call_user_func_array([$controller, $rota['metodoController']], [current($params)]);
                     }
                     if ('GET' == $verb and !count($params)) {
