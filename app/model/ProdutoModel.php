@@ -12,12 +12,12 @@ class ProdutoModel extends Crud
         return $this->_select('produto');
     }
 
-    public function detail($table, $id, $column)
+    public function detail(string $table, string $id, string $column): array
     {
         return $this->_select($table, $column, $id);
     }
 
-    public function save(array $arrProdutos)
+    public function save(array $arrProdutos): string
     {
         $teste = new TratamentoImagem();
         $imagemProduto = $teste->tratarImagem();
@@ -27,21 +27,21 @@ class ProdutoModel extends Crud
             'id_categoria' => $arrProdutos['id_categoria'],
             'nome' => $arrProdutos['nome'],
             'descricao' => $arrProdutos['descricao'],
-            'preco_produto' => $arrProdutos['preco_produto'],
+            'preco' => $arrProdutos['preco'],
             'quantidade_estoque' => $arrProdutos['quantidade_estoque'],
-            'preco_inicial' => $arrProdutos['preco_produto'],
+            'preco_inicial' => $arrProdutos['preco'],
             'imagem' => $caminho,
         ];
 
         return $this->_insert('produto', $arrDefault);
     }
 
-    public function update($table, $data, $condition, $id)
+    public function update(string $table, array $data, string $condition, string $id): string
     {
         return $this->_update($table, $data, $condition, $id);
     }
 
-    public function delete($table, $condition, $value)
+    public function delete(string $table, string $condition, string $value): string
     {
         return $this->_delete($table, $condition, $value);
     }

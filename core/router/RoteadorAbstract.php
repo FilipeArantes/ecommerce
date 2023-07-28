@@ -8,9 +8,9 @@ use core\TratamentoImagem;
 
 abstract class RoteadorAbstract
 {
-    protected $rotas = [];
+    protected array $rotas = [];
 
-    public function adicionarRota($metodo, $uri, $controller, $metodoController, $middleware = false, $admin = false)
+    public function adicionarRota(string $metodo, string $uri, string $controller, string $metodoController, ?string $middleware = null , bool $admin = false): void
     {
         $this->rotas[] = [
             'metodo' => $metodo,
@@ -22,7 +22,7 @@ abstract class RoteadorAbstract
         ];
     }
 
-    public function executar($verb, $uri)
+    public function executar(string $verb, string $uri)
     {
         foreach ($this->rotas as $rota) {
             $placeholders = [];

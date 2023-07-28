@@ -20,7 +20,7 @@ class Router extends RoteadorAbstract
 {
     public function __construct()
     {
-        $this->adicionarRota('GET', '/', HomeController::class, 'index', JWTMiddleware::class);
+        $this->adicionarRota('GET', '/', HomeController::class, 'index');
         $this->adicionarRota('GET', '/comentario', AvaliacaoController::class, 'index', JWTMiddleware::class);
         $this->adicionarRota('POST', '/comentario', AvaliacaoController::class, 'store'/* JWTMiddleware::class */);
         $this->adicionarRota('DELETE', '/comentario/{id}', AvaliacaoController::class, 'destroy'/* JWTMiddleware::class, true */);
@@ -43,9 +43,9 @@ class Router extends RoteadorAbstract
         $this->adicionarRota('POST', '/login', LoginController::class, 'logar');
         $this->adicionarRota('GET', '/pedido/{id}', PedidoController::class, 'show', JWTMiddleware::class);
         $this->adicionarRota('POST', '/pedido', PedidoController::class, 'store'/* JWTMiddleware::class */);
-        $this->adicionarRota('GET', '/pedidoCount', PedidoController::class, 'count');
-        $this->adicionarRota('GET', '/pedidosRecentes', PedidoController::class, 'recentes');
-        $this->adicionarRota('GET', '/pedidosSum', PedidoController::class, 'sum');
+        $this->adicionarRota('GET', '/pedidoCount', PedidoController::class, 'count', /* JWTMiddleware::class */);
+        $this->adicionarRota('GET', '/pedidosRecentes', PedidoController::class, 'recentes', /* JWTMiddleware::class */);
+        $this->adicionarRota('GET', '/rendimento', PedidoController::class, 'sum');
         $this->adicionarRota('GET', '/produto', ProdutoController::class, 'index', JWTMiddleware::class);
         $this->adicionarRota('GET', '/produto/{id}', ProdutoController::class, 'show', JWTMiddleware::class);
         $this->adicionarRota('POST', '/produto', ProdutoController::class, 'store'/* JWTMiddleware::class, true */);

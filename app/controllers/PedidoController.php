@@ -11,28 +11,28 @@ class PedidoController extends Controller
     ) {
     }
 
-    public function store($params)
+    public function store(array $params): string
     {
         return $this->model->checkout('pedido', $params);
     }
 
-    public function show($id)
+    public function show(string $id): array
     {
         return $this->model->showOrders('pedido', 'id_usuario', $id);
     }
 
-    public function count()
+    public function count(): array
     {
         return $this->model->countPedidos('pedido');
     }
 
-    public function recentes()
+    public function recentes(): array
     {
-        return $this->model->pedidosRecentes('pedido');
+        return $this->model->pedidosRecentes('pedido', 'itens_pedido', 'id_itens_pedido', 'id');
     }
 
-    // public function sum()
-    // {
-    //     return $this->model->sumPedidos('produto',);
-    // }
+    public function sum(): array
+    {
+        return $this->model->sumPedidos('itens_pedido', 'preco_produto');
+    }
 }

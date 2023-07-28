@@ -11,7 +11,7 @@ class ItensPedidoController extends Controller
     ) {
     }
 
-    public function store($params)
+    public function store(array $params): array
     {
         return $this->model->save($params);
     }

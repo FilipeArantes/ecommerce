@@ -8,12 +8,12 @@ use library\crud\Select;
 
 class CategoriaModel extends Crud
 {
-    public function index($table)
+    public function index(string $table): array
     {
         return $this->_select($table);
     }
 
-    public function save($params)
+    public function save(array $params): string
     {
         $teste = new TratamentoImagem();
         $imagemProduto = $teste->tratarImagem();
@@ -27,12 +27,12 @@ class CategoriaModel extends Crud
         return $this->_insert('categoria', $arrDefault);
     }
 
-    public function delete($table, $condition, $value)
+    public function delete(string $table, string $condition, string $value): string
     {
         return $this->_delete($table, $condition, $value);
     }
 
-    public function update($table, $data, $condition, $id)
+    public function update(string $table, array $data, string $condition, string $id): string
     {
         return $this->_update($table, $data, $condition, $id);
     }

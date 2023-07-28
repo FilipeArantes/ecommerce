@@ -2,9 +2,11 @@
 
 namespace library\crud;
 
+use stdClass;
+
 class Select extends Crud
 {
-    public function _select(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*', bool $unique = false): array
+    public function _select(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*', bool $unique = false): array|\stdClass|bool
     {
         $sql = [];
 
@@ -14,7 +16,7 @@ class Select extends Crud
         if ($secondCondition) {
             $sql[] = "{$secondCondition} = '{$secondValue}'";
         }
-        if ($table == 'produto' || $table == 'categoria' || $table == 'comentario'|| $table == 'itens_pedido') {
+        if ($table == 'produto' || $table == 'categoria' || $table == 'comentario' || $table == 'itens_pedido') {
             $sql[] = 'bo_ativo = true';
         }
         if ($table == 'carrinho') {
@@ -27,11 +29,11 @@ class Select extends Crud
         if ($unique) {
             return $consulta->fetch(\PDO::FETCH_OBJ);
         }
-        
+
         return $consulta->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public function _selectJoin(string $firstTable, string $secondTable, string $condition, string $secondCondition, string $where = '', string $value = '') :array
+    public function _selectJoin(string $firstTable, string $secondTable, string $condition, string $secondCondition, string $where = '', string $value = ''): array
     {
         $sql = "SELECT * FROM {$firstTable} as a JOIN {$secondTable} as b on a.{$condition} = b.{$secondCondition}";
 
@@ -51,8 +53,8 @@ class Select extends Crud
     {
         $sql = "SELECT count(*) FROM {$table}";
 
-        if ($table == 'produto' || 'categoria' || 'carrinho') {
-            $sql .= 'WHERE bo_ativo = true';
+        if ($table == 'produto' || $table == 'categoria' || $table == 'carrinho') {
+            $sql .= ' WHERE bo_ativo = true';
         }
 
         $consulta = $this->db->query($sql);
@@ -67,14 +69,12 @@ class Select extends Crud
         if ($id) {
             $sql .= " WHERE {$id} = {$condition}";
         }
-        if ( $table == "carrinho") {
-            $sql .= " AND bo_ativo_carrinho = true";
+        if ($table == 'carrinho') {
+            $sql .= ' AND bo_ativo_carrinho = true';
         }
 
         $consulta = $this->db->query($sql);
 
         return $consulta->fetch(\PDO::FETCH_ASSOC);
     }
-
-
 }

@@ -11,7 +11,7 @@ class HomeController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(): array
     {
         return $this->model->getAll();
     }

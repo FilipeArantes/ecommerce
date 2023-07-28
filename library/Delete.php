@@ -4,7 +4,7 @@ namespace library\crud;
 
 class Delete extends Crud
 {
-    public function _delete($table, $condition, $id)
+    public function _delete(string $table, string $condition, int $id): int
     {
         $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $sql = "UPDATE {$table} set bo_ativo = false WHERE {$condition} = {$id}";
@@ -14,13 +14,14 @@ class Delete extends Crud
         return $stmt->rowCount();
     }
 
-    public function _deleteDesc($table, $column, $value)
+    public function _deleteDesc(string $table, string $column, string $value): string
     {
         $this->db->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         $sql = "DELETE FROM {$table} WHERE {$column} = {$value}";
         $stmt = $this->db->prepare($sql);
+        $stmt->execute();
 
-        return $stmt->execute();
+        return $stmt->rowCount();
     }
 
     public function _deleteCart($table, $condition, $id, $secondCondition, $secondId)

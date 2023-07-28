@@ -4,7 +4,7 @@ namespace library\crud;
 
 class Update extends Crud
 {
-    public function _update($table, $data, $condition, $id, $params = []): string
+    public function _update(string $table, array $data, string $condition, int $id, array $params = []): string
     {
         $set = implode(', ', array_map(function ($column) {
             return "{$column}=?";

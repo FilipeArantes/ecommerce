@@ -11,17 +11,17 @@ class DescontoController
     ) {
     }
 
-    public function store($params)
+    public function store(array $params): string
     {
         return $this->model->save('desconto', $params);
     }
 
-    public function update($id, $params)
+    public function update(string $id, array $params): string
     {
         return $this->model->update('desconto', $params, 'id', $id);
     }
 
-    public function destroy($id)
+    public function destroy(string $id): string
     {
         return $this->model->delete('desconto', 'id', $id);
     }

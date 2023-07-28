@@ -14,7 +14,7 @@ class LoginController extends Controller
     ) {
     }
 
-    public function logar(array $params)
+    public function logar(array $params): object
     {
         return $this->model->logar($params['email'], $params['senha']);
     }

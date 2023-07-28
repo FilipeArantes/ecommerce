@@ -3,7 +3,6 @@
 namespace core\responses;
 
 use core\responses\exceptions\AppError;
-use Error;
 
 class Responses
 {

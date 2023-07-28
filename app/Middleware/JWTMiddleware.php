@@ -9,8 +9,8 @@ class JWTMiddleware
 {
     use Base64UrlEncode;
 
-    private $secretKey;
-    private $adminKey;
+    private string $secretKey;
+    private string $adminKey;
 
     public function __construct()
     {
@@ -18,7 +18,7 @@ class JWTMiddleware
         $this->adminKey = $_ENV['ADMKEY'];
     }
 
-    public function handle($isAdm = '') 
+    public function handle($isAdm = '') : bool
     {
         $token = $this->extractTokenFromRequest();
 
@@ -45,7 +45,7 @@ class JWTMiddleware
         }
     }
 
-    private function extractTokenFromRequest()
+    private function extractTokenFromRequest(): string | null
     {
         $authorizationHeader = getallheaders()['Authorization'];
 
@@ -56,7 +56,7 @@ class JWTMiddleware
         return null;
     }
 
-    private function validateToken($token): bool
+    private function validateToken(string $token): bool
     {
         $parts = explode('.', $token);
 
@@ -77,7 +77,7 @@ class JWTMiddleware
         return false;
     }
 
-    private function validateAdmToken($token)
+    private function validateAdmToken(string $token): bool
     {
         $parts = explode('.', $token);
 

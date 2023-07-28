@@ -2,6 +2,8 @@
 
 namespace library\crud;
 
+use stdClass;
+
 class Crud
 {
     public function __construct(
@@ -9,14 +11,14 @@ class Crud
     ) {
     }
 
-    public function _select(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*'): array
+    public function _select(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*'): array| stdClass | bool
     {
         $select = new Select();
 
         return $select->_select($table, $condition, $value, $secondCondition, $secondValue, $column);
     }
 
-    public function _selectUnique(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*'): array
+    public function _selectUnique(string $table, string $condition = '', string $value = '', string $secondCondition = '', string $secondValue = '', string $column = '*'): array | stdClass |bool
     {
         $select = new Select();
 
@@ -44,21 +46,21 @@ class Crud
         return $selectSum->_selectSum($table, $column, $id, $condition);
     }
 
-    public function _insert($table, $arrValores)
+    public function _insert(string $table, array $arrValores): string
     {
         $insert = new Insert();
 
         return $insert->_insert($table, $arrValores);
     }
 
-    public function _delete($table, $condition, $value)
+    public function _delete(string $table, string $condition, int $value): int
     {
         $delete = new Delete();
 
         return $delete->_delete($table, $condition, $value);
     }
 
-    public function _deleteDesc($table, $condition, $value)
+    public function _deleteDesc(string $table, string $condition, string $value): string
     {
         $delete = new Delete();
 
@@ -72,7 +74,7 @@ class Crud
         return $delete->_deleteCart($table, $condition, $id, $secondCondition, $secondId);
     }
 
-    public function _update($table, $data, $condition, $id, $params = [])
+    public function _update(string $table, array $data, string $condition, int $id, array $params = []): string
     {
         $update = new Update();
 

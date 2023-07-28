@@ -13,7 +13,7 @@ class UsuarioController extends Controller
     ) {
     }
 
-    public function store($params)
+    public function store($params): \stdClass
     {
         $select = new Crud();
         if (!$params['nome']) {

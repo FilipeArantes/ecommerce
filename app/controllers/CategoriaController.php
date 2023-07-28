@@ -11,22 +11,22 @@ class CategoriaController
     ) {
     }
 
-    public function index()
+    public function index(): array
     {
         return $this->model->index('categoria');
     }
 
-    public function store($params)
+    public function store(array $params): string
     {
         return $this->model->save($params);
     }
 
-    public function update($id, $params)
+    public function update(string $id, array $params): string
     {
         return $this->model->update('categoria', $params, 'id', $id);
     }
 
-    public function destroy($id)
+    public function destroy(string $id): string
     {
         return $this->model->delete('categoria', 'id', $id);
     }
