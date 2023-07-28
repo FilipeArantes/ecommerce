@@ -24,7 +24,7 @@ class Router extends RoteadorAbstract
         $this->adicionarRota('GET', '/comentario', AvaliacaoController::class, 'index', JWTMiddleware::class);
         $this->adicionarRota('POST', '/comentario', AvaliacaoController::class, 'store', JWTMiddleware::class);
         $this->adicionarRota('DELETE', '/comentario/{id}', AvaliacaoController::class, 'destroy', JWTMiddleware::class, true);
-        $this->adicionarRota('GET', '/categoria', CategoriaController::class, 'index', JWTMiddleware::class);
+        $this->adicionarRota('GET', '/categoria', CategoriaController::class, 'index', JWTMiddleware::class, true);
         $this->adicionarRota('POST', '/categoria', CategoriaController::class, 'store', JWTMiddleware::class, true);
         $this->adicionarRota('PUT', '/categoria/{id}', CategoriaController::class, 'update', JWTMiddleware::class, true);
         $this->adicionarRota('DELETE', '/categoria/{id}', CategoriaController::class, 'destroy', JWTMiddleware::class, true);
