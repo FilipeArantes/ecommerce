@@ -11,27 +11,27 @@ class ProdutoController extends Controller
     ) {
     }
 
-    public function index()
+    public function index(): array
     {
         return $this->model->getAll();
     }
 
-    public function show($id)
+    public function show(string $id): array
     {
         return $this->model->detail('produto', $id, 'id');
     }
 
-    public function store($params)
+    public function store(array $params): string
     {
         return $this->model->save($params);
     }
 
-    public function update($id, $params)
+    public function update(string $id, array $params): string
     {
         return $this->model->update('produto', $params, 'id', $id);
     }
 
-    public function destroy($id)
+    public function destroy(string $id): string
     {
         return $this->model->delete('produto', 'id', $id);
     }
